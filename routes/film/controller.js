@@ -30,6 +30,27 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
+    },
+    getNewFilm: async (req,res) => {
+        const date = new Date()
+        console.log(date.getFullYear(), "ini date");
+        
+        try {
+            const result = await Films.findAll({
+                where: {
+                    year: {
+                        [Op.gte]: date.getFullYear()
+                    }
+                }
+            })
+            res.status(200).json({
+                message: "Get New Film",
+                data: result
+            })
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     
 }
