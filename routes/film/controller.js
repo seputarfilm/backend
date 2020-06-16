@@ -33,13 +33,14 @@ module.exports = {
     },
     getNewFilm: async (req,res) => {
         const date = new Date()
-        // console.log(date.getFullYear(), "ini date");
+        console.log(date.getFullYear() + 1, "ini log date")
         
         try {
             const result = await Films.findAll({
                 where: {
-                    year: {
-                        [Op.gte]: date.getFullYear()
+                    year: { 
+                        [Op.gte]: date.getFullYear(),
+                        [Op.lt]: date.getFullYear() + 1
                     }
                 }
             })
