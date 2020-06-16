@@ -33,7 +33,7 @@ module.exports = {
     },
     getNewFilm: async (req,res) => {
         const date = new Date()
-        console.log(date.getFullYear(), "ini date");
+        // console.log(date.getFullYear(), "ini date");
         
         try {
             const result = await Films.findAll({
@@ -51,6 +51,25 @@ module.exports = {
             console.log(error);
             
         }
+    },
+    getSoonFilm: async (req,res) => {
+        const date = new Date()
+        try {
+            const result = await Films.findAll({
+                where: {
+                    year: {
+                        [Op.gt]: date.getFullYear() 
+                    }
+                }
+            })
+            res.status(200).json({
+                message: "Get Comming Soon Film",
+                data: result
+            })
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
     
 }
